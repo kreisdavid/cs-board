@@ -1,0 +1,68 @@
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div id=title class="field">
+    <%= f.text_field :title,:placeholder => 'Title' %>
+  </div>
+  <div id=location class="field">
+    <%= f.text_field :location,:placeholder => 'Location' %>
+  </div>
+  <div id="description" class="field">
+    <%= f.text_area :description, :size => "50x10",:placeholder => 'Description (use Markdown!)' %>
+  </div>
+  <div id=datepicker class="field">
+    <%= f.text_field :expire_date, 'data-behaviour' => 'datepicker',:placeholder => 'Expiration Date'%>
+    <script type="text/javascript">
+      $('[data-behaviour~=datepicker]').datepicker({
+          format: "dd/mm/yyyy",
+          startDate: "-today",
+          weekStart: 1,
+          maxViewMode: 2,
+          todayHighlight: true,
+          autoclose: true
+      });
+    </script>
+  </div>
+  <div class = "field">
+    <%= f.label "Offer Type" %><br>
+    <%= f.select :offer_type, Offer.instance.get_select_format %>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="button-group">
+        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+          <text>Tags</text><span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" style="right: auto; left: auto;">
+          <% Tag.instance.TAG_TYPES.each do |tag| %>
+            <text>&nbsp</text>
+            <%= f.check_box(:tag_list, { :multiple => true }, tag, nil) %>
+            <%= tag %> <br />
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div> <br />
+  <div>
+    <%= f.button  :Preview, name: "preview",value: "yes" %>
+  </div>
+  <div>
+    <br />
+    <%= recaptcha_tags %>
+    <br />
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+    The post will not be visible until approved by an administrator.
+  </div>
+<% end %>

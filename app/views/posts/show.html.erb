@@ -1,0 +1,44 @@
+<%= content_for :title, t(".title", name: @post.title) %>
+<p id="notice"><%= notice %></p>
+
+<h1>
+  <%= @post.title %>
+</h1>
+<hr>
+<div>
+  <%= markdown(@post.description) %>
+</div>
+
+<hr>
+
+<p>
+  <strong>Location: </strong>
+  <%=@post.location%>
+</p>
+<p>
+  <strong>Expires: </strong>
+  <%=@post.expire_date%>
+</p>
+
+<p>
+  <strong>Offer Type: </strong>
+  <%=@post.offer_type%>
+</p>
+
+<p>
+  <strong>Tags: </strong>
+  <%=@post.get_comma_separated_tags%>
+</p>
+
+<p> Save Post: <%= check_box_tag 'Save', 0, checked = @post.is_saved(current_user.id),
+data: {
+ remote: true,
+ url: url_for(action: :toggle_save, controller: 'posts', id: @post.id),
+ method: 'POST'
+}%>
+<br>
+
+<%= link_to 'Delete', @post, method: :delete, data: { confirm: 'Are you sure?' } if current_user.is_admin? %>
+<br>
+<%= link_to 'Edit ', edit_post_path(@post) if current_user.is_admin?%>
+<%= link_to ' Back ', ((request.env["HTTP_REFERER"].present? && (request.env["HTTP_REFERER"].to_s.include? "edit")) ? approve_posts_path : url_for(:back)) %>

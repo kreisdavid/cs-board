@@ -1,0 +1,61 @@
+// Place all the styles related to the Posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+  padding-top: 60px;
+  padding-left: 20px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+
+#description.text_field {
+  width: 200%;
+}
+
+.rounded_tag_box
+{
+  padding-top: -2px;
+  padding-bottom: 3px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 6px;
+  border-width: 1px;
+  border-style: solid;
+  display: inline-block;
+  font-size: 12px;
+  background-color: #fff;
+}
+
+div.padded {
+    padding-top: 5px;
+}
+
+.notice {
+  text-align: center;
+  background-color: #5bc0de;
+  max-width: 300px;
+  margin: auto;
+}
+
+text.hideable {
+  display: none;
+}

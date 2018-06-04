@@ -1,0 +1,52 @@
+<p>
+  <h1>Account</h1>
+
+  <strong>Email:</strong>
+  <%= current_user.email %>
+  <br>
+  <strong>Get Email Notifications: </strong>
+  <%= check_box_tag 'Toggle Notifications', 0, checked = current_user.wants_notifications,
+        data: {
+          remote: true,
+          url: url_for(action: :toggle_get_notifactions, controller: 'users', id: current_user.id),
+          method: 'GET'
+  } %>
+
+  <br>
+  <%= link_to 'Edit Account Settings', edit_user_registration_path %>
+
+<h1>Saved Posts </h1>
+  <table id="saved-posts-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Expires</th>
+        <th>Save Post</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_user.posts.each do |post| %>
+        <tr>
+          <td>
+            <text class="post-text">
+              <%= link_to post.title, post %>
+            </text>
+          </td>
+          <td>
+            <text class="post-text" align="right">
+              <%= post.expire_date.strftime("%-m/%-d/%Y") %>
+            </text>
+          </td>
+          <td>
+            <%= check_box_tag 'Save', 0, checked = post.is_saved(current_user.id),
+           data: {
+             remote: true,
+             url: url_for(action: :toggle_save, controller: 'posts', id: post.id),
+             method: 'POST'
+           }%>
+         </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</p>

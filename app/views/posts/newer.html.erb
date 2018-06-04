@@ -1,0 +1,23 @@
+ <noscript>Sorry! JavaScript must be enabled to submit post (Captcha requires it) </noscript>
+<div class="container">
+<h1>Preview: </h1>
+<h1>
+<%= @post.title %>
+</h1>
+<hr>
+<div>
+  <%= markdown(@post.description) %>
+</div>
+
+<hr>
+<p>
+  <strong>Expires:</strong>
+  <%= @post.expire_date%>
+</p>
+
+<p>
+  <strong>Offer Type:</strong>
+  <%= @post.offer_type %>
+</p>
+    <%= render 'form' %>
+<div/>

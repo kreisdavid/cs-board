@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= yield %>
+<% if user_signed_in? %>
+    <%= render 'layouts/header' %>
+<% else %>
+    <%= render 'pages/header' unless current_page?(root_path)%>
+<% end %>
+<% if !user_signed_in? %>
+  <p class="notice"><%= notice %></p>
+<% end %>
+<p class="alert"><%= alert %></p>
+
+
+</body>
+</html>

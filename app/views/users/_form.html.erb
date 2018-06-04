@@ -1,0 +1,7 @@
+<%= form_for(current_user, :url => '/users#index', :html => { :method => :put }) do |f| %>
+    <%= f.text_field :email, :placeholder => :email %> <br />
+  
+  <div class="actions">
+  	<%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+<h1>Grinnell CS Opportunities</h1>
+<%= search_form_for @search, url: search_posts_path, method: :post do |f| %>
+  <%= f.condition_fields do |c|%>
+    <%= render "condition_fields", f: c %>
+  <% end %>
+  <p><%= link_to_add_fields "Add Conditions", f, :condition %></p>
+  <p><%= check_box_tag :search_archive, 0, (params.key? :search_archive) %>
+     <%= label_tag(:search_archive, "Search expired posts") %></p>
+  <div class="actions"><%= f.submit "Search"%></div>
+<% end %>
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <% @posts.each_with_index do |post, index| %>
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="heading-<%=index%>" data-toggle="collapse" data-parent="#accordion" href="#collapse-<%=index%>" aria-expanded="false" aria-controls="collapse-<%=index%>">
+        <div class = "panel-title pull-left">
+          <text font-size="16px" class="hideable"><strong><%= post.post_index_title %></strong></text>
+          <text font-size="16px"><strong><noscript><%=link_to post.post_index_title, post%></noscript></strong></text>
+          <script type="text/javascript">$(".hideable").removeClass("hideable");</script>
+        </div>
+        <div class="panel-date pull-right">
+          <text><%=post.expire_date.strftime("%a, %m/%d/%y") %></text>
+        </div>
+        <div class="clearfix"></div>
+        <div class="panel-location pull-left">
+          <text><%=post.location%></text>
+        </div>
+        <% if post.tag_list.size > 0 %>
+          <div class="padded pull-right">
+            <% post.tag_list.each do |tag| %>
+              <span class="rounded_tag_box" style="border-color: <%=get_color(tag)%>">
+                <%=tag%>
+              </span>
+            <% end %>
+          </div>
+        <% end %>
+        <div class="clearfix"></div>
+      </div>
+      <div id="collapse-<%=index%>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-<%=index%>">
+         <div class="panel-body">
+          <%= markdown(post.description) %>
+          <p> Save Post: <%= check_box_tag 'Save', 0, checked = post.is_saved(current_user.id),
+            data: {
+              remote: true,
+              url: url_for(action: :toggle_save, controller: 'posts', id: post.id),
+              method: 'POST'
+            }%>
+          </p>
+           <%=link_to 'view detail', post =%>
+         </div>
+      </div>
+    </div>
+   <% end %>
+ </div>

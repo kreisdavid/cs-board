@@ -1,0 +1,54 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: Test1
+  description: MyString
+  created_at: <%= 5.day.ago.to_s(:db) %>
+  updated_at: <%= 5.day.ago.to_s(:db) %>
+  expire_date: <%= 10.days.from_now.to_date %>
+  expire_time: <%= Time.now %>
+  id: 1
+  offer_type: Internship
+  approved: true
+  archived: false
+  location: Some location
+
+  
+two:
+  title: Test2
+  description: MyString
+  created_at: <%= 5.day.ago.to_s(:db) %>
+  updated_at: <%= 5.day.ago.to_s(:db) %>
+  expire_date: <%= 10.days.from_now.to_date %>
+  expire_time: <%= Time.now %>
+  id: 2
+  offer_type: Full-Time
+  approved: false
+  archived: false
+  location: Some other location
+
+three:
+  title: Test3
+  description: MyString
+  created_at: <%= 5.day.ago.to_s(:db) %>
+  updated_at: <%= 5.day.ago.to_s(:db) %>
+  expire_date: <%= 10.days.from_now.to_date %>
+  expire_time: <%= Time.now %>
+  id: 3
+  offer_type: Full-Time
+  approved: false
+  archived: true
+  location: Yet another location
+
+four:
+  title: Test4
+  description: MyString
+  created_at: <%= 5.day.ago.to_s(:db) %>
+  updated_at: <%= 5.day.ago.to_s(:db) %>
+  expire_date: <%= 10.days.from_now.to_date %>
+  expire_time: <%= Time.now %>
+  id: 4
+  offer_type: Full-Time
+  approved: false
+  archived: false # not archived yet
+  location: Yet another location
