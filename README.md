@@ -2,6 +2,8 @@
 
 Allows alumni to post opportunities for undergraduates through a secure portal.
 
+This repository is a public copy of the private repository used to create this site for a class at Grinnell College.
+
 ### Development notes
 
 
